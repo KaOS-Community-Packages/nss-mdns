@@ -1,6 +1,11 @@
 # nss-mdns
 *version 0.14.1*.
 
+```
+kcp -u
+kcp -i nss-mdns
+```
+
 **nss-mdns** is a plugin for the GNU Name Service Switch (NSS) functionality of the GNU C Library (glibc) providing host name resolution via Multicast DNS (aka Zeroconf, aka Apple Rendezvous, aka Apple Bonjour), effectively allowing name resolution by common Unix/Linux programs in the ad-hoc mDNS domain .local.
 
 nss-mdns provides client functionality only, which means that you have to run a mDNS responder daemon seperately from nss-mdns if you want to register the local host name via mDNS. I recommend Avahi.
