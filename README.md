@@ -20,7 +20,7 @@ After compiling and installing nss-mdns you'll find six new NSS modules in /lib:
 - libnss_mdns6_minimal.so.2
 
 ## Activation
-To activate one of the NSS modules you have to edit /etc/nsswitch.conf and add mdns4 and mdns4_minimal (resp. mdns, mdns6) to the line starting with "hosts:". On Debian this looks like this:
+To activate one of the NSS modules you have to edit /etc/nsswitch.conf and add mdns4 and mdns4_minimal (resp. mdns, mdns6) to the line starting with "hosts:". On KaOS this looks like this:
 
 ```
 # Begin /etc/nsswitch.conf
@@ -31,7 +31,7 @@ shadow: files
 
 publickey: files
 
-hosts: files **mdns4_minimal [NOTFOUND=return]** dns **mdns4** myhostname mymachines resolve [!UNAVAIL=return] 
+hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4 myhostname mymachines resolve [!UNAVAIL=return] 
 networks: files
 
 protocols: files
