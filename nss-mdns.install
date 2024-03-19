@@ -1,0 +1,4 @@
+post_install() {
+	[ -f /etc/nsswitch.conf.bak ] && rm /etc/nsswitch.conf.bak
+	sed --in-place='.bak' '/^[ \t]*hosts:[ \t]\+/ { /mdns/! s/hosts:[ \t]\+[^ \t]\+/& mdns4_minimal [NOTFOUND=return]/}' /etc/nsswitch.conf
+}

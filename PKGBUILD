@@ -1,25 +1,25 @@
 pkgname=nss-mdns
 pkgver=0.15.1
-pkgrel=2
-pkgdesc='nss-mdns is a plugin for the GNU Name Service Switch (NSS) functionality of the GNU C Library (glibc) providing host name resolution via Multicast DNS (aka Zeroconf, aka Apple Rendezvous, aka Apple Bonjour), effectively allowing name resolution by common Unix/Linux programs in the ad-hoc mDNS domain .local.'
+pkgrel=3
+pkgdesc='glibc plugin providing host name resolution via mDNS'
 arch=('x86_64')
-url='https://github.com/lathiat/nss-mdns'
-license=('GPLv2')
-depends=()
+url='http://0pointer.de/lennart/projects/nss-mdns'
+license=('LGPL2.1')
+depends=('glibc' 'avahi')
 makedepends=()
-source=("https://github.com/lathiat/nss-mdns/releases/download/v0.14.1/nss-mdns-${pkgver}.tar.gz")
-md5sums=('78b96e7360a8af106c609c9c5fc17274')
-
-src_name="nss-mdns-${pkgver}"
+source=("https://github.com/avahi/${pkgname}/releases/download/v${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha512sums=('11a82ae9f209326b4501c7e6d33c9932b370c4dcacb64d6783140e25688ad6391bbd113e51ee470fd8be12669124eac331593cfd02a040383b4f964ed6ec6154')
+install=nss-mdns.install
 
 build() {
-    cd "${src_name}"
-
+    cd "$pkgname-$pkgver"
     ./configure
-    make -j$(nproc)
+    make
 }
 
 package() {
-    cd "${src_name}"
-    make DESTDIR="$pkgdir/" install 
+    cd "$pkgname-$pkgver"
+    make DESTDIR="$pkgdir/" install
+    install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    install -Dm644 "README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
 }
